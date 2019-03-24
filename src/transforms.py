@@ -217,3 +217,39 @@ class DropNaN(TransformerMixin):
 
     def transform(self, df):
         return df.dropna()
+
+class GetLables(TransformerMixin):
+    ''' 
+    Get the labels following the user index in the feature dataframe.
+    -----
+    Methods
+    ------------------------
+    > fit(df_user, df_features)
+    Parameters:
+    - df_user: dataframe containing the user's data
+    - df_features: dataframe the outta be used as the feature set.
+    -----
+    Returns:
+    self
+
+    > transform(df_user, df_features)
+    
+    Parameters:
+    - df_user: dataframe containing the user's data
+    - df_features: dataframe the outta be used as the feature set. 
+    -----
+    Returns:
+    - df: a dataframe.
+    -----------------
+    OBS.: fit_transform method is available, inherited from TransformerMixin class.
+    '''
+
+    def __init__(self, labels_name='quality', offset=3):
+        self.labels_name = labels_name
+        self.offset = offset
+
+    def fit(self, labels_name='quality', offset=3):
+        return self
+
+    def transform(self, df):
+        return df[self.labels_name].values - self.offset

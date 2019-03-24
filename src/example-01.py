@@ -40,7 +40,7 @@ pipeline = Pipeline([('cleaner', DataCleaning()),
                      ('scaler', FeatureScaling()),
                      ('droper', DropNaN())])
 
-feat_pipe = pipeline.fit_transform(features)
+feat_pipe = pipeline.fit_transform(data)
 
 # Get the labels for classification. It should ne be part of the pipeline
 print('Feature set without pipeline: \n {}'.format(feat_dropped.head()))
@@ -52,3 +52,8 @@ print('Shape of Feature set with pipeline: \n {}'.format(feat_pipe.shape))
 
 # Dump this transformer
 joblib.dump(pipeline, os.path.join('models', 'pipeline.pkl'))
+
+
+labels = GetLables().fit_transform(data)
+print(labels)
+print(np.unique(labels))
