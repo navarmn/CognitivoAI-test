@@ -1,12 +1,12 @@
 version: '3'
 
 services:
-  # app:
-  #   build: .
-  #   container_name: app_navar
-  #   ports: 
-  #     - 1313:8080
-
+  app:
+    build: .
+    container_name: app_navar
+    ports: 
+      - 1313:4748
+      
   notebook:
     build:
       context: .

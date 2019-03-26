@@ -75,7 +75,7 @@ def read_test_data():
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--port', default=4567, type=int)
+    parser.add_argument('--port', default=1313, type=int)
     parser.add_argument('--host', default='0.0.0.0', type=str)
     args = vars(parser.parse_args()) 
 
