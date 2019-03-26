@@ -32,6 +32,7 @@ docker-compose up
 There is a `MAKEFILE` which automates the processes. Use:
 - `make build` to build all containers at once (the notebook and the API); 
 - `make notebook` to run the notebok inside a docker container;
+- `make run` to bring up the notebok and the API;
 
 ### The jupyter notebook
 

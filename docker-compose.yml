@@ -5,8 +5,8 @@ services:
     build: .
     container_name: app_navar
     ports: 
-      - 1313:4748
-      
+      - 1313:1313
+
   notebook:
     build:
       context: .

@@ -2,7 +2,7 @@
 FROM jupyter/base-notebook
 
 # Set the working directory to /app
-make WORKDIR /solution
+WORKDIR /solution
 COPY requirements.txt /solution
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 

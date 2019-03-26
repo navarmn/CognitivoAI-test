@@ -25,7 +25,7 @@ COPY . /app
 WORKDIR /app/src
 
 # The app port
-EXPOSE 80
+EXPOSE 1313
 
 # Run app.py when the container launches
 CMD ["python", "app.py"]
