@@ -9,14 +9,19 @@ sys.path.append('..')
 import joblib
 
 # Global variables
-DATA_FOLDER = os.path.join('data', 'raw')
+DATA_FOLDER = os.path.join('..', 'data', 'raw')
 USER_DATA = 'winequality_90.csv'
+
+def read_test_data():
+    return pd.read_json('test_input.json', orient='records')
 
 
 # Load dataset
 data = pd.read_csv(os.path.join(DATA_FOLDER, USER_DATA))
+# data = read_test_data()
 # Drop the label
 features=data.drop(['quality'], axis=1)
+# features = data
 
 # Preprocessing:
 ## You can user the transformers functions in the following order:
@@ -40,7 +45,7 @@ pipeline = Pipeline([('cleaner', DataCleaning()),
                      ('scaler', FeatureScaling()),
                      ('droper', DropNaN())])
 
-feat_pipe = pipeline.fit_transform(data)
+feat_pipe = pipeline.fit_transform(features)
 
 # Get the labels for classification. It should ne be part of the pipeline
 print('Feature set without pipeline: \n {}'.format(feat_dropped.head()))
@@ -51,7 +56,7 @@ print('Shape of Feature set with pipeline: \n {}'.format(feat_pipe.shape))
 
 
 # Dump this transformer
-joblib.dump(pipeline, os.path.join('models', 'pipeline.pkl'))
+joblib.dump(pipeline, os.path.join('..', 'models', 'pipeline.pkl'))
 
 
 labels = GetLables().fit_transform(data)

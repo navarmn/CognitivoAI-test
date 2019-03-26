@@ -1,3 +1,6 @@
+models/random_forest_1000est_2leaf_depth40.pkl
+
+notebooks/Results-analyses-3/05-Hyperparameter_tuning/results-04-mlp-random-search.pkl
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

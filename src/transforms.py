@@ -7,7 +7,7 @@ from sklearn.preprocessing import StandardScaler
 FEATURES_TO_DROP = ['type']
 
 
-class DataCleaning(BaseEstimator, TransformerMixin):
+class DataCleaning(TransformerMixin):
     ''' 
     Clean data according the procedures studied in the notebook analyses-02. In short: 
     (i) Drops Nan; (ii) split data in categorical and numerical features; 
@@ -47,13 +47,18 @@ class DataCleaning(BaseEstimator, TransformerMixin):
         # Map the wine type
         df_clean['type'] = df_clean['type'].map({'Red': 1, 'White': 2})
 
-        # Transform str to float from the alcohol table
-        df_clean['alcohol'] = df_clean['alcohol'].map(self._str_to_float)
+        # TODO check if dataframe haw only one row
+
+        if df_clean.shape[0] == 1:
+            df_clean['alcohol'] = float(df_clean['alcohol'])
+        else:
+            # Transform str to float from the alcohol table
+            df_clean['alcohol'] = df_clean['alcohol'].map(self._str_to_float)
 
         # Drop NaN
         data_raw_dropped = df_clean.dropna()
 
-        # TODO check if dataframe haw only one row
+        
 
         return data_raw_dropped
 
@@ -63,7 +68,7 @@ class DataCleaning(BaseEstimator, TransformerMixin):
             return np.NaN
         return float(s)
 
-class RemoveFeatures(BaseEstimator, TransformerMixin):
+class RemoveFeatures(TransformerMixin):
     ''' 
     Remove unwanted features from the dataframes;
     -----
@@ -99,7 +104,7 @@ class RemoveFeatures(BaseEstimator, TransformerMixin):
     def transform(self, df):
         return df.drop(columns=self.features)
 
-class FeatureScaling(BaseEstimator, TransformerMixin):
+class FeatureScaling(TransformerMixin):
     ''' 
     Scale features by standardization;
     -----
@@ -133,12 +138,12 @@ class FeatureScaling(BaseEstimator, TransformerMixin):
     def __init__(self, type='std'):
         self.type = type
 
-    def fit(self, df):
+    def fit(self, df, y=None):
         self._scaler = StandardScaler().fit(df)
         
         return self
 
-    def transform(self, df):
+    def transform(self, df, y=None):
         if self.type == 'std':
             df_std = self._scaler.transform(df)
             df_std = pd.DataFrame(data=df_std, 
@@ -253,3 +258,5 @@ class GetLables(TransformerMixin):
 
     def transform(self, df):
         return df[self.labels_name].values - self.offset
+
+
