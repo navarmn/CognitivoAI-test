@@ -192,10 +192,17 @@ def save_pipeline(pipeline):
 def export_results(results, foldername, foldertree='Results'):
     import os
     cwd = os.getcwd()
-    print(cwd)
+    print('Here: {}'.format(cwd))
+    print('foldername: {}'.format(foldername))
+    print('foldertree: {}'.format(foldertree))
+    print(os.path.join(cwd, foldertree, foldername))
     
+    # results_to_csv(results, foldername, foldertree=os.path.join(cwd, foldertree))  
+    # ROC_curves(results, foldername, foldertree=os.path.join(cwd, foldertree))  
+
     results_to_csv(results, foldername, foldertree=foldertree)  
-    ROC_curves(results, foldername, foldertree=foldertree)  
+    ROC_curves(results, foldername, foldertree=foldertree)
+
     return None
     
 def ROC_curves(results, foldername, foldertree='Results'):
